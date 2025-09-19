@@ -22,12 +22,6 @@ void MIPI_DSI::setup() {
     delay(10);
   }
 
-  esp_lcd_panel_io_i2c_config_t i2c_config = {
-  .dev_addr = 0x45,
-  .lcd_cmd_bits = 8,
-  .lcd_param_bits = 8,
-  };
-
   esp_lcd_dsi_bus_config_t bus_config = {
       .bus_id = 0,  // index from 0, specify the DSI host to use
       .num_data_lanes =
@@ -45,8 +39,7 @@ void MIPI_DSI::setup() {
       .lcd_cmd_bits = 8,    // according to the LCD spec
       .lcd_param_bits = 8,  // according to the LCD spec
   };
-  err = esp_lcd_new_panel_io_i2c(this->bus_handle_, &i2c_config, &this->io_handle_)
-  //err = esp_lcd_new_panel_io_dbi(this->bus_handle_, &dbi_config, &this->io_handle_);
+  err = esp_lcd_new_panel_io_dbi(this->bus_handle_, &dbi_config, &this->io_handle_);
   if (err != ESP_OK) {
     this->smark_failed("new_panel_io_dbi failed", err);
     return;
