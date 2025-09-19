@@ -67,9 +67,9 @@ void MIPI_DSI::setup() {
                                            .flags = {
                                                .use_dma2d = true,
                                            }};
-  err = esp_lcd_new_panel_dpi(this->bus_handle_, &dpi_config, &this->handle_);
+  err = esp_lcd_new_panel_dsi(this->bus_handle_, &dpi_config, &this->handle_);
   if (err != ESP_OK) {
-    this->smark_failed("esp_lcd_new_panel_dpi failed", err);
+    this->smark_failed("esp_lcd_new_panel_dsi failed", err);
     return;
   }
   if (this->reset_pin_ != nullptr) {
